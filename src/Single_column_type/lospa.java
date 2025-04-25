@@ -1,6 +1,6 @@
 package Single_column_type;
 
-public class Test {
+public class lospa {
     public static void main(String[] args)  {
         singleA a= singleA.get();
         singleA a1 = singleA.get();
