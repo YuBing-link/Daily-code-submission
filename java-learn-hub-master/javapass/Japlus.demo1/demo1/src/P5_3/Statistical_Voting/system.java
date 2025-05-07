@@ -41,10 +41,11 @@ public class system {
                 for (int i = 0; i < 3; i++) {
                     w += summary.charAt(random.nextInt(summary.length() -1));
                 }
-            }
+            };
             s[j] = (new Student(w, arr[random.nextInt(arr.length)]));
             System.out.println(s[j]);
-            spot.compute(s[j].getWantname(), (key, oldValue) -> oldValue + 1);
+//            spot.compute(s[j].getWantname(), (key, oldValue) -> oldValue + 1);
+            spot.put(s[j].getWantname(), spot.get(s[j].getWantname())+1);
         }
 
 
@@ -58,9 +59,14 @@ public class system {
         for(Map.Entry<String,Integer> sx:spot.entrySet()){
             if(max==sx.getValue()){
                 System.out.println("获得投票最多的是"+sx.getKey());
+
+
             }
         }
-
+        System.out.println("泰山的票数"+spot.get("泰山"));
+        System.out.println("海岛的票数"+spot.get("海岛"));
+        System.out.println("雪山的票数"+spot.get("雪山"));
+        System.out.println("湖泊的票数"+spot.get("湖泊"));
 
 
     }
