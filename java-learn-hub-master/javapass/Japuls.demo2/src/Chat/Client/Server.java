@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class Server {
     public static Map<Socket, String > OnlineServer = new HashMap<>();
+    public static Map<Socket, String>  personalServer = new HashMap<>();
     public static void main(String[] args) {
         System.out.println("服务端启动。。。。。。。。。");
         try {
@@ -21,7 +22,7 @@ public class Server {
 
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+                e.printStackTrace();
         }
     }
 
