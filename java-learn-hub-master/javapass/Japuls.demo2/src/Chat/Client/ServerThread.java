@@ -1,15 +1,12 @@
 package Chat.Client;
 
-import javax.swing.text.DateFormatter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
-import java.util.Collections;
 
 public class ServerThread extends Thread {
     private Socket socket;
@@ -34,6 +31,9 @@ public class ServerThread extends Thread {
                         SendAll(dis.readUTF());
 
                     }
+                    case 3->{
+                        SendPrivate(dis.readUTF(),dis.readUTF());
+                    }
 
                 }
             }
@@ -46,6 +46,27 @@ public class ServerThread extends Thread {
 
 
     }
+
+    private void SendPrivate(String userName, String m) {
+        String msg = new StringBuffer().append(Server.OnlineServer.get(socket))
+            .append(" ").append(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss a").format(LocalDateTime.now()))
+            .append("\r\n").append(m).append("\r\n").toString();
+
+        try {
+            for (Socket targetSocket : Server.OnlineServer.keySet()) {
+                if (Server.OnlineServer.get(targetSocket).equals(userName)) {
+                    DataOutputStream dos = new DataOutputStream(targetSocket.getOutputStream());
+                    dos.writeInt(3);
+                    dos.writeUTF(msg);
+                    dos.flush();
+                    break; // 找到目标用户后立即退出循环
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     private void SendAll(String s) {
        String msg=new StringBuffer().append(Server.OnlineServer.get(socket)).append(" ").append(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss a").format(LocalDateTime.now()))

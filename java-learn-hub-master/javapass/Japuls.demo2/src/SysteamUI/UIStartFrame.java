@@ -119,11 +119,10 @@ public class UIStartFrame extends JFrame implements ActionListener {
             // 用户自定义的反应内容可以从这里开始写
 
             if(!nicknameField.getText().isEmpty()) {
-
                 login();
-                new UIWorkFrame(socket);
+                new UIWorkFrame(socket, nicknameField.getText());
                 dispose();
-            }else {
+            } else {
                 JOptionPane.showConfirmDialog(this, "请输入昵称");
             }
             // TODO: 用户可在此添加自定义逻辑
@@ -135,6 +134,9 @@ public class UIStartFrame extends JFrame implements ActionListener {
             // TODO: 用户可在此添加自定义逻辑
         }
     }
+
+    // 其他代码保持不变
+
 
     private void login() {
         try {
@@ -152,3 +154,4 @@ public class UIStartFrame extends JFrame implements ActionListener {
     // 测试方法
 
 }
+
