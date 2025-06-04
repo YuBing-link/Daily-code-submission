@@ -1,4 +1,0 @@
-CREATE TABLE MY_TABLE (
-  `avg(salary)` DECIMAL
-);
-INSERT INTO MY_TABLE(`avg(salary)`) VALUES (17000.000000);
