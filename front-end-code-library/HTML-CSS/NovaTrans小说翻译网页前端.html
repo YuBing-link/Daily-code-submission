@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>NovaTrans Ultra - 增强版小说翻译平台</title>
+    <link href="./NovaTrans Ultra - 增强版小说翻译平台_files/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00bfa5; /* 主色调改为绿蓝色 */
+            --secondary: #00838f; /* 深绿色调 */
+            --bg: #0f172a;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        body {
+            background: var(--bg);
+            color: #e2e8f0;
+            font-family: 'Segoe UI', system-ui;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 16px;
+            box-shadow: 0 0 30px rgba(0, 191, 167, 0.2);
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 2px solid #334155;
+        }
+
+        .logo {
+            font-family: 'Arial Black';
+            font-size: 2em;
+            background: linear-gradient(45deg, var(--primary), #ff69b4); /* 添加粉色渐变 */
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .search-bar {
+            flex: 1;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            background: #1e293b;
+            border: none;
+            padding: 12px;
+            color: white;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .upload-wrapper {
+            position: relative;
+            margin: 30px 0;
+            border: 2px dashed var(--primary);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .upload-wrapper:hover {
+            background: rgba(0, 191, 167, 0.1);
+            transform: scale(1.02);
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .upload-label {
+            cursor: pointer;
+            display: block;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #334155;
+            border-radius: 4px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), #ff69b4); /* 添加粉色渐变 */
+            transition: width 0.3s;
+        }
+
+        .format-conversion {
+            margin: 20px;
+            padding: 20px;
+            background: #1e293b;
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+
+        .format-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .format-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .bilingual-processing {
+            margin: 20px;
+            padding: 20px;
+            background: #1e293b;
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+
+        .processing-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .language-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .advanced-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 20px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 20px;
+        }
+
+        .option-group {
+            padding: 15px;
+            border: 1px solid #334155;
+            border-radius: 8px;
+        }
+
+        .editor-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .editor-panel {
+            background: #1e293b;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .editor-panel:hover {
+            transform: translateY(-5px);
+        }
+
+        .panel-header {
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lang-select {
+            background: var(--bg);
+            color: white;
+            border: 1px solid var(--primary);
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .translation-result {
+            padding: 20px;
+            line-height: 1.8;
+            min-height: 500px;
+            border: 1px dashed #334155;
+            margin: 20px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.02);
+            overflow-y: auto;
+        }
+
+        .translation-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .cyber-button {
+            background: var(--bg);
+            border: 2px solid var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .cyber-button:hover {
+            background: var(--primary);
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        .floating-menu {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-direction: column;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .button-icon {
+            font-size: 1.2em;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transform: translateX(120%);
+            transition: transform 0.3s;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .notification.warning {
+            border-left: 4px solid var(--warning);
+        }
+
+        .notification.danger {
+            border-left: 4px solid var(--danger);
+        }
+
+        .notification-icon {
+            font-size: 1.2em;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #334155;
+            color: #9ca3af;
+            font-size: 0.9em;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #334155;
+            color: #e2e8f0;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* 距离元素底部的距离 */
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <canvas class="particles" id="particles" width="111" height="595"></canvas>
+    
+    <div class="container">
+        <header class="header">
+            <div class="logo">NALIO：小说翻译平台</div>
+            <div class="search-bar">
+                <input type="text" placeholder="🔍 搜索小说或作者...">
+            </div>
+            <div class="user-actions">
+                <button class="cyber-button">
+                    <i class="fas fa-user"></i> 注册/登录
+                </button>
+                <button class="cyber-button">
+                    <i class="fas fa-bell"></i> 通知
+                </button>
+            </div>
+        </header>
+
+        <div class="upload-wrapper">
+            <input type="file" id="fileInput" accept=".txt,.epub,.docx,.mobi,.pdf,.azw3">
+            <label for="fileInput" class="upload-label">
+                <i class="fas fa-cloud-upload-alt fa-3x" style="color: var(--primary)"></i>
+                <h3>拖放文件或点击上传整本小说</h3>
+                <p>支持格式：TXT / EPUB / DOCX / MOBI / PDF / AZW3 (最大100MB)</p>
+            </label>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+
+        <div class="format-conversion">
+            <div class="format-title">
+                <i class="fas fa-exchange-alt button-icon"></i>
+                <h3>小说格式转换</h3>
+            </div>
+            <div class="format-options">
+                <select class="lang-select">
+                    <option>当前格式</option>
+                    <option>TXT</option>
+                    <option>EPUB</option>
+                    <option>DOCX</option>
+                    <option>MOBI</option>
+                    <option>PDF</option>
+                    <option>AZW3</option>
+                </select>
+                <select class="lang-select">
+                    <option>目标格式</option>
+                    <option>TXT</option>
+                    <option>EPUB</option>
+                    <option>DOCX</option>
+                    <option>MOBI</option>
+                    <option>PDF</option>
+                    <option>AZW3</option>
+                </select>
+            </div>
+            <button class="cyber-button" style="margin-top: 15px; justify-content: center;">
+                <i class="fas fa-arrow-right button-icon"></i>开始转换
+            </button>
+        </div>
+
+        <div class="bilingual-processing">
+            <div class="processing-title">
+                <i class="fas fa-language button-icon"></i>
+                <h3>双语处理</h3>
+            </div>
+            <div class="language-options">
+                <select class="lang-select">
+                    <option>保留语言</option>
+                    <option>中文</option>
+                    <option>日语</option>
+                    <option>英语</option>
+                    <option>韩语</option>
+                    <option>法语</option>
+                    <option>德语</option>
+                    <option>西班牙语</option>
+                </select>
+                <select class="lang-select">
+                    <option>移除语言</option>
+                    <option>中文</option>
+                    <option>日语</option>
+                    <option>英语</option>
+                    <option>韩语</option>
+                    <option>法语</option>
+                    <option>德语</option>
+                    <option>西班牙语</option>
+                </select>
+            </div>
+            <button class="cyber-button" style="margin-top: 15px; justify-content: center;">
+                <i class="fas fa-trash-alt button-icon"></i>执行处理
+            </button>
+        </div>
+
+        <div class="advanced-options">
+            <div class="option-group">
+                <div class="option-title">
+                    <i class="fas fa-cogs"></i>
+                    <span>翻译设置</span>
+                </div>
+                <select class="lang-select">
+                    <option>智能分章翻译</option>
+                    <option>全文连续翻译</option>
+                    <option>自定义段落翻译</option>
+                </select>
+            </div>
+
+            <div class="option-group">
+                <div class="option-title">
+                    <i class="fas fa-palette"></i>
+                    <span>风格预设</span>
+                </div>
+                <select class="lang-select">
+                    <option>文学润色模式</option>
+                    <option>直译模式</option>
+                    <option>口语化翻译</option>
+                    <option>学术翻译</option>
+                </select>
+            </div>
+
+            <div class="option-group">
+                <div class="option-title">
+                    <i class="fas fa-file-export"></i>
+                    <span>输出设置</span>
+                </div>
+                <select class="lang-select">
+                    <option>保留原文格式</option>
+                    <option>仅保留文本</option>
+                    <option>双语对照格式</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="editor-container">
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <h3><i class="fas fa-globe button-icon"></i> 原文</h3>
+                    <select class="lang-select">
+                        <option>自动检测</option>
+                        <option>日语</option>
+                        <option>英语</option>
+                        <option>韩语</option>
+                        <option>法语</option>
+                        <option>德语</option>
+                        <option>西班牙语</option>
+                        <option>意大利语</option>
+                        <option>俄语</option>
+                    </select>
+                </div>
+                <div class="translation-result" contenteditable="true"></div>
+            </div>
+
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <h3><i class="fas fa-robot button-icon"></i> 译文</h3>
+                    <select class="lang-select">
+                        <option>简体中文</option>
+                        <option>繁体中文</option>
+                        <option>English</option>
+                        <option>日本語</option>
+                        <option>한국어</option>
+                        <option>Français</option>
+                        <option>Deutsch</option>
+                        <option>Español</option>
+                        <option>Italiano</option>
+                        <option>Русский</option>
+                    </select>
+                </div>
+                <div class="translation-result"></div>
+            </div>
+        </div>
+
+        <div class="translation-controls">
+            <button class="cyber-button">
+                <i class="fas fa-bolt button-icon"></i>即时翻译
+            </button>
+            <button class="cyber-button">
+                <i class="fas fa-magic button-icon"></i>AI润色
+            </button>
+            <button class="cyber-button">
+                <i class="fas fa-book button-icon"></i>术语库
+            </button>
+            <button class="cyber-button">
+                <i class="fas fa-code-compare button-icon"></i>对比模式
+            </button>
+            <button class="cyber-button">
+                <i class="fas fa-gears button-icon"></i>高级设置
+            </button>
+            <button class="cyber-button">
+                <i class="fas fa-file-export button-icon"></i>导出
+            </button>
+        </div>
+    </div>
+
+    <div class="floating-menu">
+        <button class="cyber-button" style="animation: float 3s infinite">
+            <i class="fas fa-book-open"></i> 阅读模式
+        </button>
+        <button class="cyber-button" style="animation: float 3s infinite 0.5s">
+            <i class="fas fa-database"></i> 文库
+        </button>
+        <button class="cyber-button" style="animation: float 3s infinite 1s">
+            <i class="fas fa-history"></i> 历史记录
+        </button>
+        <button class="cyber-button" style="animation: float 3s infinite 1.5s">
+            <i class="fas fa-comments"></i> 社区
+        </button>
+    </div>
+
+    <div class="notification warning" id="notification">
+        <i class="fas fa-exclamation-circle notification-icon"></i>
+        <div>
+            <strong>格式转换警告</strong>
+            <p>请选择源格式和目标格式</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2023 NALIO 小说翻译平台 | 隐私政策 | 使用条款 | 联系我们</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speed = Math.random() * 0.5 + 0.1;
+            }
+            update() {
+                this.y += this.speed;
+                if (this.y > canvas.height) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(0, 191, 167, ${this.size/2})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            for(let i=0; i<100; i++) particles.push(new Particle());
+            animate();
+        }
+
+        function animate() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        const fileInput = document.getElementById('fileInput');
+        const progressFill = document.querySelector('.progress-fill');
+
+        document.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            document.querySelector('.upload-wrapper').style.backgroundColor = 'rgba(0, 191, 167, 0.1)';
+        });
+
+        document.addEventListener('dragleave', () => {
+            document.querySelector('.upload-wrapper').style.backgroundColor = '';
+        });
+
+        document.addEventListener('drop', (e) => {
+            e.preventDefault();
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+
+        function handleFiles(files) {
+            if(files.length > 0) {
+                simulateUpload(files[0]);
+            }
+        }
+
+        function simulateUpload(file) {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                progressFill.style.width = `${Math.min(progress, 100)}%`;
+                if(progress >= 100) {
+                    clearInterval(interval);
+                    showNotification('success', '文件上传成功', '文件已成功上传并准备处理');
+                }
+            }, 200);
+        }
+
+        document.querySelector('.format-conversion button').addEventListener('click', () => {
+            const sourceFormat = document.querySelector('.format-conversion select:first-child').value;
+            const targetFormat = document.querySelector('.format-conversion select:last-child').value;
+            
+            if(sourceFormat === '当前格式' || targetFormat === '目标格式') {
+                showNotification('warning', '格式转换警告', '请选择源格式和目标格式');
+                return;
+            }
+            
+            if(sourceFormat === targetFormat) {
+                showNotification('warning', '格式转换警告', '源格式和目标格式不能相同');
+                return;
+            }
+            
+            showNotification('success', '格式转换成功', `已将${sourceFormat}格式成功转换为${targetFormat}格式`);
+        });
+
+        document.querySelector('.bilingual-processing button').addEventListener('click', () => {
+            const keepLang = document.querySelector('.bilingual-processing select:first-child').value;
+            const removeLang = document.querySelector('.bilingual-processing select:last-child').value;
+            
+            if(keepLang === '保留语言' || removeLang === '移除语言') {
+                showNotification('warning', '双语处理警告', '请选择要保留和移除的语言');
+                return;
+            }
+            
+            if(keepLang === removeLang) {
+                showNotification('warning', '双语处理警告', '保留语言和移除语言不能相同');
+                return;
+            }
+            
+            showNotification('success', '双语处理成功', `已成功移除${removeLang}，保留${keepLang}`);
+        });
+
+        function showNotification(type, title, message) {
+            const notification = document.getElementById('notification');
+            notification.className = `notification ${type} show`;
+            notification.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-exclamation-circle' : 'fa-times-circle'} notification-icon"></i>
+                <div>
+                    <strong>${title}</strong>
+                    <p>${message}</p>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        initParticles();
+
+        // 添加响应式设计
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
