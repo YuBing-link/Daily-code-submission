@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.nvoe</groupId>
-    <artifactId>EmoDemo</artifactId>
+    <artifactId>EmpDemo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>EmoDemo</name>
     <description>EmoDemo</description>
