@@ -1,10 +1,8 @@
 package com.nvoe.intelligentmanagementsystem.Mapper;
 
 import com.nvoe.intelligentmanagementsystem.POJO.Emp;
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,6 +16,8 @@ public interface EmpMapper {
     @Insert("insert into emp (username, name, gender, image, job, entrydate, dept_id, create_time, update_time) " +
             "values (#{username}, #{name}, #{gender}, #{image}, #{job}, #{entrydate}, #{deptId}, #{createTime}, #{updateTime});")
     void save(Emp emp);
+
+    void up(Emp emp);
 //    @Select("select count(id) from emp")
 //    Integer count();
 //    @Select("select * from emp limit #{page},#{pageSize}")

@@ -3,7 +3,6 @@ package com.nvoe.intelligentmanagementsystem.Service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.nvoe.intelligentmanagementsystem.Mapper.EmpMapper;
 import com.nvoe.intelligentmanagementsystem.POJO.Emp;
 import com.nvoe.intelligentmanagementsystem.POJO.PageBean;
@@ -16,9 +15,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class EmpServiceimpl implements EmpService {
+public class EmpServiceimpl implements  EmpService {
     @Autowired
     private EmpMapper empMapper;
+
+    @Override
+    public void up(Emp emp) {
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.up(emp);
+    }
+
     @Override
     public PageBean page(Integer page, Integer pageSize, String name, Short gender,
                          LocalDate begin, LocalDate end)
@@ -46,4 +52,5 @@ public class EmpServiceimpl implements EmpService {
         emp.setUpdateTime(LocalDateTime.now());
         empMapper.save(emp);
     }
+
 }

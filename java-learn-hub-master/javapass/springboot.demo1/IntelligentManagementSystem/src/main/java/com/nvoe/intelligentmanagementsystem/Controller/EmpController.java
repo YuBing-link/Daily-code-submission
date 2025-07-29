@@ -5,11 +5,13 @@ import com.nvoe.intelligentmanagementsystem.POJO.Emp;
 import com.nvoe.intelligentmanagementsystem.POJO.PageBean;
 import com.nvoe.intelligentmanagementsystem.POJO.Result;
 import com.nvoe.intelligentmanagementsystem.Service.EmpService;
+import com.nvoe.intelligentmanagementsystem.utils.aliyunOSS;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Insert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -45,6 +47,14 @@ public class EmpController {
         empService.save(emp);
         return Result.success();
     }
+    @PutMapping
+    public Result up(@RequestBody Emp emp) {
+        log.info("emp:{}",emp);
+        empService.up(emp);
+        return Result.success();
+    }
+
+
 
 
 }
