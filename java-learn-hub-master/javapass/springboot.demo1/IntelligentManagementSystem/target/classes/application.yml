@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: IntelligentManagementSystem
+  servlet:
+    multipart:
+      max-file-size: 10MB # 单个文件最大大小，可按需调整
+      max-request-size: 100MB # 整个请求的最大大小，可按需调整
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/tail
+    username: root
+    password: 40475625
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+aliyun:
+  oss:
+    accessKeyId: ${OSS_ACCESS_KEY_ID}
+    accessKeySecret: ${OSS_ACCESS_KEY_SECRET}
+    endpoint: https://oss-cn-hangzhou.aliyuncs.com
+    bucketName: show-tails
+
