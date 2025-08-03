@@ -1,4 +1,4 @@
-package com.nvoe.intelligentmanagementsystem.utils;
+package com.nvoe.intelligentmanagementsystem.utils.aliUtils;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

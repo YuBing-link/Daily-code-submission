@@ -2,7 +2,6 @@ package com.nvoe.intelligentmanagementsystem.Service;
 
 import com.nvoe.intelligentmanagementsystem.POJO.Emp;
 import com.nvoe.intelligentmanagementsystem.POJO.PageBean;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,4 +18,6 @@ public interface EmpService {
     void delete(List<Integer> ids);
 
     void save(Emp emp);
+
+    Emp login(Emp emp);
 }

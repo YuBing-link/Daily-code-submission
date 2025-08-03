@@ -1,4 +1,4 @@
-package com.nvoe.intelligentmanagementsystem.utils;
+package com.nvoe.intelligentmanagementsystem.utils.aliUtils;
 
 import com.aliyun.oss.*;
 
@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
-import java.io.File;
 import java.util.UUID;
 @Component
 public class aliyunOSS {
