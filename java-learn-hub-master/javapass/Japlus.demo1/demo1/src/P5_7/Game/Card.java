@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package P5_7.Game;
 
 import lombok.AllArgsConstructor;
@@ -17,3 +18,24 @@ public class Card {
         return color+size;
     }
 }
+=======
+package P5_7.Game;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Card {
+    private String size;
+    private String color;
+    private int num;
+
+    @Override
+    public String toString() {
+        return color+size;
+    }
+}
+>>>>>>> bdeb85edff313e367535c724cc175d32e969374e

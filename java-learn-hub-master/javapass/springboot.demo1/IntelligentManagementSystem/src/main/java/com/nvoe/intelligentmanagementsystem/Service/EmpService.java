@@ -18,6 +18,4 @@ public interface EmpService {
     void delete(List<Integer> ids);
 
     void save(Emp emp);
-
-    Emp login(Emp emp);
 }

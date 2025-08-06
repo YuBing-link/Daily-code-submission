@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="MaterialThemeProjectNewConfig">
@@ -9,4 +10,17 @@
       </MTProjectMetadataState>
     </option>
   </component>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MaterialThemeProjectNewConfig">
+    <option name="metadata">
+      <MTProjectMetadataState>
+        <option name="migrated" value="true" />
+        <option name="pristineConfig" value="false" />
+        <option name="userId" value="-7e2c7111:1969f98b543:-7ffe" />
+      </MTProjectMetadataState>
+    </option>
+  </component>
+>>>>>>> bdeb85edff313e367535c724cc175d32e969374e
 </project>

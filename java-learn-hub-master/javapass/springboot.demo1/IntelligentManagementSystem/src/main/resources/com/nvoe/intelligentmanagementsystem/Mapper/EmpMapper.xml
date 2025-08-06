@@ -51,7 +51,6 @@
         </where>
         order by update_time desc
     </select>
-
     <delete id="delete">
         delete from emp where id in
         <foreach collection="ids" item="id" separator="," open="(" close=")">

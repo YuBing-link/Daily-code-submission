@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 # 默认忽略的文件
 /shelf/
 /workspace.xml
 # 依赖于环境的 Maven 主目录路径
 /mavenHomeManager.xml
+=======
+# 默认忽略的文件
+/shelf/
+/workspace.xml
+# 依赖于环境的 Maven 主目录路径
+/mavenHomeManager.xml
+>>>>>>> bdeb85edff313e367535c724cc175d32e969374e

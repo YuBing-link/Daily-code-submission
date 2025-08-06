@@ -53,9 +53,4 @@ public class EmpServiceimpl implements  EmpService {
         empMapper.save(emp);
     }
     
-    @Override
-    public Emp login(Emp emp) {
-       return empMapper.getByUsernameAndPassword(emp);
     }
-
-}

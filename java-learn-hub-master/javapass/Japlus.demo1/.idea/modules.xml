@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProjectModuleManager">
@@ -6,4 +7,14 @@
       <module fileurl="file://$PROJECT_DIR$/demo5/demo5.iml" filepath="$PROJECT_DIR$/demo5/demo5.iml" />
     </modules>
   </component>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Japlus.demo1.iml" filepath="$PROJECT_DIR$/Japlus.demo1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo5/demo5.iml" filepath="$PROJECT_DIR$/demo5/demo5.iml" />
+    </modules>
+  </component>
+>>>>>>> bdeb85edff313e367535c724cc175d32e969374e
 </project>
