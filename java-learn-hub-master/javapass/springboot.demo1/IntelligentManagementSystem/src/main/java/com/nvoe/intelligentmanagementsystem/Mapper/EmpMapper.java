@@ -3,6 +3,7 @@ package com.nvoe.intelligentmanagementsystem.Mapper;
 import com.nvoe.intelligentmanagementsystem.POJO.Emp;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,6 +19,8 @@ public interface EmpMapper {
     void save(Emp emp);
 
     void up(Emp emp);
+    @Select("select * from emp where username=#{username} and password=#{password}")
+    Emp login(Emp emp);
 //    @Select("select count(id) from emp")
 //    Integer count();
 //    @Select("select * from emp limit #{page},#{pageSize}")

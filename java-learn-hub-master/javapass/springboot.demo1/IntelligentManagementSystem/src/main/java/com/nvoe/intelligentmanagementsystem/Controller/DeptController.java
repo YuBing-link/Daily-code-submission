@@ -3,6 +3,7 @@ package com.nvoe.intelligentmanagementsystem.Controller;
 import com.nvoe.intelligentmanagementsystem.POJO.Dept;
 import com.nvoe.intelligentmanagementsystem.POJO.Result;
 import com.nvoe.intelligentmanagementsystem.Service.impl.DeptServiceimpl;
+import com.nvoe.intelligentmanagementsystem.anno.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,14 @@ public class DeptController {
         log.info("查询部门全部信息");
         return Result.success(deptService.getDepts());
     }
+    @Log
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id){
         deptService.delete(id);
         log.info("根据id删除部门:{}",id);
         return Result.success();
     }
+    @Log
     @PostMapping
     public Result save(@RequestBody Dept dept){
         deptService.save(dept);

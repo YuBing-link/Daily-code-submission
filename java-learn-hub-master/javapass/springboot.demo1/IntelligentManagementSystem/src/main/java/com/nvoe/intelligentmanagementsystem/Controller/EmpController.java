@@ -4,6 +4,7 @@ import com.nvoe.intelligentmanagementsystem.POJO.Emp;
 import com.nvoe.intelligentmanagementsystem.POJO.PageBean;
 import com.nvoe.intelligentmanagementsystem.POJO.Result;
 import com.nvoe.intelligentmanagementsystem.Service.EmpService;
+import com.nvoe.intelligentmanagementsystem.anno.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -30,6 +31,7 @@ public class EmpController {
 
         return Result.success(pageBean);
     }
+    @Log
     @DeleteMapping("/{ids}")
     public Result delete(@PathVariable List<Integer> ids) {
         log.info("ids:{}",ids);
@@ -37,12 +39,14 @@ public class EmpController {
         return Result.success();
 
     }
+    @Log
     @PostMapping
     public Result insert(@RequestBody Emp emp) {
         log.info("emp:{}",emp);
         empService.save(emp);
         return Result.success();
     }
+    @Log
     @PutMapping
     public Result up(@RequestBody Emp emp) {
         log.info("emp:{}",emp);

@@ -5,10 +5,11 @@ package com.nvoe.intelligentmanagementsystem.utils.JwtUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Password;
+import io.jsonwebtoken.security.Keys;
 
 import java.util.Date;
 import java.util.Map;
+import javax.crypto.SecretKey;
 
 /**
  * JWT工具类，用于生成和解析JWT令牌
@@ -24,9 +25,10 @@ public class Jwt {
      * @return 生成的JWT令牌字符串
      */
     public static String generateJwt(Map<String, Object> claims){
+        SecretKey key = Keys.hmacShaKeyFor(signKey.getBytes());
         String jwt = Jwts.builder()
                     .addClaims(claims)
-                    .signWith(SignatureAlgorithm.HS256, signKey)
+                    .signWith(key, SignatureAlgorithm.HS256)
                     .setExpiration(new Date(System.currentTimeMillis() + expire))
                     .compact();
         return jwt;
@@ -38,8 +40,9 @@ public class Jwt {
      * @return JWT第二部分负载 payload 中存储的内容
      */
     public static Claims parseJWT(String jwt){
-        Claims claims = Jwts.parser()
-                    .setSigningKey(signKey)
+        SecretKey key = Keys.hmacShaKeyFor(signKey.getBytes());
+        Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(key)
                     .build()
                     .parseClaimsJws(jwt)
                     .getBody();

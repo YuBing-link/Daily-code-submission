@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c0e511b5-150e-44c4-95bb-6181c699aed1" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/constant/AutoFillConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/constant/JwtClaimsConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/constant/MessageConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/constant/PasswordConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/constant/StatusConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/context/BaseContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/enumeration/OperationType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/exception/AccountLockedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/exception/AccountNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/exception/AddressBookBusinessException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/exception/BaseException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/exception/DeletionNotAllowedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/exception/LoginFailedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/exception/OrderBusinessException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/exception/PasswordEditFailedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/exception/PasswordErrorException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/exception/SetmealEnableFailedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/exception/ShoppingCartBusinessException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/exception/UserNotLoginException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/json/JacksonObjectMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/properties/AliOssProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/properties/JwtProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/properties/WeChatProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/result/PageResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/result/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/utils/AliOssUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/utils/HttpClientUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/utils/JwtUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-common/src/main/java/com/sky/utils/WeChatPayUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/CategoryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/CategoryPageQueryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/DataOverViewQueryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/DishDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/DishPageQueryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/EmployeeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/EmployeeLoginDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/EmployeePageQueryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/GoodsSalesDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/OrdersCancelDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/OrdersConfirmDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/OrdersDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/OrdersPageQueryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/OrdersPaymentDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/OrdersRejectionDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/OrdersSubmitDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/PasswordEditDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/SetmealDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/SetmealPageQueryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/ShoppingCartDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/dto/UserLoginDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/entity/AddressBook.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/entity/Category.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/entity/Dish.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/entity/DishFlavor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/entity/Employee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/entity/OrderDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/entity/Orders.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/entity/Setmeal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/entity/SetmealDish.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/entity/ShoppingCart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/BusinessDataVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/DishItemVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/DishOverViewVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/DishVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/EmployeeLoginVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/OrderOverViewVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/OrderPaymentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/OrderReportVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/OrderStatisticsVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/OrderSubmitVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/OrderVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/SalesTop10ReportVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/SetmealOverViewVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/SetmealVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/TurnoverReportVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/UserLoginVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-pojo/src/main/java/com/sky/vo/UserReportVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/SkyApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/config/WebMvcConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/controller/admin/EmployeeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/handler/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/interceptor/JwtTokenAdminInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/mapper/EmployeeMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/EmployeeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/impl/EmployeeServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/application-dev.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/mapper/EmployeeMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/Mapper/OperateMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/POJO/OperateLog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/anno/Log.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/aop/LogAspect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot.demo1/aliyun-oss-spring-boot-autoconfigure/src/main/java/com/nvoe/aliyunoss/AliyunConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot.demo1/aliyun-oss-spring-boot-autoconfigure/src/main/java/com/nvoe/aliyunoss/AliyunOSS.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot.demo1/aliyun-oss-spring-boot-autoconfigure/src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot.demo1/aliyun-oss-test/src/main/java/com/nvoe/aliyunosstest/Controller/UploadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/Controller/DeptController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/Controller/DeptController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/Controller/EmpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/Controller/EmpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/Controller/UploadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/Controller/UploadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/Mapper/EmpMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/Mapper/EmpMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/Service/EmpService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/Service/EmpService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/Service/impl/EmpServiceimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/Service/impl/EmpServiceimpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/utils/FilterUtils/FilterConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/utils/FilterUtils/FilterConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/utils/FilterUtils/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/utils/FilterUtils/JwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/utils/InterceptorUtils/LoginInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/utils/InterceptorUtils/LoginInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/utils/JwtUtils/Jwt.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/utils/JwtUtils/Jwt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/utils/ali.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/aliyun-oss-spring-boot-autoconfigure/src/main/java/com/nvoe/aliyunoss/AliyunOssProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/utils/aliUtils/ali.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/utils/aliUtils/aliyunOSS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/src/main/java/com/nvoe/intelligentmanagementsystem/utils/aliyunOSS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/Controller/DeptController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/Controller/DeptController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/Controller/EmpController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/Controller/EmpController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/Controller/UploadController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/Mapper/EmpMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/Mapper/EmpMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/Service/EmpService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/Service/EmpService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/Service/impl/EmpServiceimpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/Service/impl/EmpServiceimpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/utils/FilterUtils/FilterConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/utils/FilterUtils/JwtFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/utils/InterceptorUtils/LoginInterceptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/utils/InterceptorUtils/LoginInterceptor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/utils/JwtUtils/Jwt.class" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/utils/JwtUtils/Jwt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/utils/ali.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/utils/aliUtils/ali.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/utils/aliUtils/aliyunOSS.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot.demo1/IntelligentManagementSystem/target/classes/com/nvoe/intelligentmanagementsystem/utils/aliyunOSS.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="31xK8XBCFtrRpnbOxbyVChF9X91" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.SkyApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Git-Submission-Files/GitHub/Daily-code-submission/java-learn-hub-master/javapass/sky",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.3034483",
+    "settings.editor.selected.configurable": "configurable.group.tools",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql_aurora"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Git-Submission-Files\GitHub\Daily-code-submission\java-learn-hub-master\javapass\sky" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="SkyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="sky-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.sky.SkyApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26927.53" />
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.26927.53" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="c0e511b5-150e-44c4-95bb-6181c699aed1" name="更改" comment="" />
+      <created>1756460124918</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1756460124918</updated>
+      <workItem from="1756460125988" duration="1683000" />
+      <workItem from="1756461856662" duration="2244000" />
+      <workItem from="1756543580410" duration="3385000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

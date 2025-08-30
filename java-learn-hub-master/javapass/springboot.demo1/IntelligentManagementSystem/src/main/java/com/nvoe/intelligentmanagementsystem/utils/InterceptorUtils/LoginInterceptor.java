@@ -14,13 +14,12 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
         String token = request.getHeader("Authorization");
-        if (token == null || !token.startsWith("Bearer ")) {
+        if (token == null ) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write("{\"code\":401,\"msg\":\"令牌无效\"}");
             return false;
         }
-        token = token.substring(7); // 移除 Bearer 前缀
 
         // 2. 解析 JWT 令牌（调用 JwtUtils 工具类）
         try {
