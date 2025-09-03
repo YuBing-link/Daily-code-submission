@@ -5,22 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0e511b5-150e-44c4-95bb-6181c699aed1" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/annotation/AutoFill.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/aspect/AutoFillAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/controller/admin/CategoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/mapper/CategoryMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/mapper/DishMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/mapper/SetmealMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/CategoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/impl/CategoryServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/mapper/CategoryMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/config/OssConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/controller/admin/CommonController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/controller/admin/DishController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/mapper/DishFlavorsMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/DishService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/impl/DishServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/mapper/DishFlavorsMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/mapper/DishMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/controller/admin/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/controller/admin/EmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/mapper/EmployeeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/mapper/EmployeeMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/EmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/impl/EmployeeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/impl/EmployeeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/mapper/DishMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/mapper/DishMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/mapper/EmployeeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/mapper/EmployeeMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +27,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -42,6 +39,9 @@
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="31xK8XBCFtrRpnbOxbyVChF9X91" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -77,6 +77,9 @@
   "keyToStringList": {
     "DatabaseDriversLRU": [
       "mysql_aurora"
+    ],
+    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 方言": [
+      "MySQL"
     ]
   }
 }]]></component>
@@ -126,6 +129,7 @@
       <workItem from="1756543580410" duration="8779000" />
       <workItem from="1756621940191" duration="211000" />
       <workItem from="1756628158585" duration="6641000" />
+      <workItem from="1756880762467" duration="9102000" />
     </task>
     <servers />
   </component>
