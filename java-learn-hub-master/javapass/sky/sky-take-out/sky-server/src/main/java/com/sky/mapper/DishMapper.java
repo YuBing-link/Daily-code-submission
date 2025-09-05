@@ -30,4 +30,7 @@ public interface DishMapper {
     Integer getById(Long id);
     @Delete("delete from dish where id=#{id}")
     void delete(Long id);
+
+    void deleteBatch(List<Long> Ids);
+
 }
