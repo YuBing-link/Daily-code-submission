@@ -5,18 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0e511b5-150e-44c4-95bb-6181c699aed1" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/config/OssConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/controller/admin/CommonController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/controller/admin/DishController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/mapper/DishFlavorsMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/DishService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/impl/DishServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/mapper/DishFlavorsMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/mapper/DishMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/mapper/SetMealDishMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/mapper/SetMealDishMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/controller/admin/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/controller/admin/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/controller/admin/DishController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/controller/admin/DishController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/mapper/DishFlavorsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/mapper/DishFlavorsMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/mapper/DishMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/mapper/DishMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/DishService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/DishService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/impl/DishServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/java/com/sky/service/impl/DishServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/mapper/DishMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sky-take-out/sky-server/src/main/resources/mapper/DishMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +25,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -62,7 +60,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.SkyApplication.executor": "Run",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Git-Submission-Files/GitHub/Daily-code-submission/java-learn-hub-master/javapass/sky/sky-take-out/sky-server/src/main/java/com/sky/controller/admin",
+    "last_opened_file_path": "D:/Git-Submission-Files/GitHub/Daily-code-submission/java-learn-hub-master/javapass/sky/sky-take-out/sky-server/src/main/resources/mapper",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -85,10 +83,10 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Git-Submission-Files\GitHub\Daily-code-submission\java-learn-hub-master\javapass\sky\sky-take-out\sky-server\src\main\resources\mapper" />
       <recent name="D:\Git-Submission-Files\GitHub\Daily-code-submission\java-learn-hub-master\javapass\sky\sky-take-out\sky-server\src\main\java\com\sky\controller\admin" />
       <recent name="D:\Git-Submission-Files\GitHub\Daily-code-submission\java-learn-hub-master\javapass\sky\sky-take-out\sky-server\src\main\java\com\sky\service\impl" />
       <recent name="D:\Git-Submission-Files\GitHub\Daily-code-submission\java-learn-hub-master\javapass\sky\sky-take-out\sky-server\src\main\java\com\sky\service" />
-      <recent name="D:\Git-Submission-Files\GitHub\Daily-code-submission\java-learn-hub-master\javapass\sky\sky-take-out\sky-server\src\main\resources\mapper" />
       <recent name="D:\Git-Submission-Files\GitHub\Daily-code-submission\java-learn-hub-master\javapass\sky\sky-take-out\sky-server\src\main\java\com\sky\mapper" />
     </key>
   </component>
@@ -130,6 +128,7 @@
       <workItem from="1756621940191" duration="211000" />
       <workItem from="1756628158585" duration="6641000" />
       <workItem from="1756880762467" duration="9102000" />
+      <workItem from="1757050747389" duration="6244000" />
     </task>
     <servers />
   </component>
