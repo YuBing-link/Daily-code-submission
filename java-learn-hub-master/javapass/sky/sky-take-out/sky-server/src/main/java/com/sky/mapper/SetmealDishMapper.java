@@ -5,7 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface SetMealDishMapper {
+public interface SetmealDishMapper {
 
-    List<Long> getSetMealDishIdsByDishId(List<Long> Ids);
+     List<Long> getSetMealDishIdsByDishId(List<Long> ids);
+
 }

@@ -8,12 +8,37 @@
         insert into dish (name, category_id, price, image, description, create_time, update_time, create_user, update_user,status)
         values (#{name},#{categoryId},#{price},#{image},#{description},#{createTime},#{updateTime},#{createUser},#{updateUser},#{status})
     </insert>
+    <update id="update">
+        update dish 
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="image != null">
+                image = #{image},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            update_time = #{updateTime},
+            update_user = #{updateUser}
+        </set>
+        where id = #{id}
+    </update>
     <delete id="deleteBatch">
         delete from dish where id in
         <foreach collection="Ids" item="id" separator="," open="(" close=")">
            #{id}
         </foreach>
-
     </delete>
     <select id="pageQuery" resultType="com.sky.vo.DishVO">
         select d.*, c.name as  categoryName from dish d left outer join category c on d.category_id = c.id
@@ -25,9 +50,10 @@
                 and d.category_id =#{categoryId}
             </if>
             <if test="status !=null">
-                and d.status=#{status}
+                and d.status = #{status}
             </if>
         </where>
-        order by d.create_time desc
+        order by d.update_time desc
     </select>
+
 </mapper>

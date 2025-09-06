@@ -11,7 +11,7 @@ import com.sky.entity.DishFlavor;
 import com.sky.exception.DeletionNotAllowedException;
 import com.sky.mapper.DishFlavorsMapper;
 import com.sky.mapper.DishMapper;
-import com.sky.mapper.SetMealDishMapper;
+import com.sky.mapper.SetmealDishMapper;
 import com.sky.result.PageResult;
 import com.sky.service.DishService;
 import com.sky.vo.DishVO;
@@ -30,25 +30,22 @@ public class DishServiceImpl implements DishService {
     @Autowired
     DishFlavorsMapper dishFlavorsMapper;
     @Autowired
-    SetMealDishMapper setMealDishMapper;
+    SetmealDishMapper setmealDishMapper;
     @Override
     @Transactional
     public void dishWithFlavors(DishDTO dishDTO) {
-        Dish dish=new Dish();
-        BeanUtils.copyProperties(dishDTO,dish);
-        //添加菜品
+        Dish dish = new Dish();
+        BeanUtils.copyProperties(dishDTO, dish);
+        // 添加菜品
         dishMapper.insert(dish);
-        Long dishID=dish.getId();
-        //添加口味
+        // 添加口味
         List<DishFlavor> flavors = dishDTO.getFlavors();
-        if(flavors!=null && !flavors.isEmpty()){
-            flavors.forEach(dishFlavor->{
-                dishFlavor.setDishId(dishID);
+        if (flavors != null && !flavors.isEmpty()) {
+            flavors.forEach(dishFlavor -> {
+                dishFlavor.setDishId(dish.getId());
             });
             dishFlavorsMapper.insertBatch(flavors);
         }
-
-
     }
 
     @Override
@@ -69,7 +66,7 @@ public class DishServiceImpl implements DishService {
                throw new DeletionNotAllowedException(MessageConstant.DISH_ON_SALE);
             }
         }
-        List<Long> setMealDishIdsByDishId = setMealDishMapper.getSetMealDishIdsByDishId(ids);
+        List<Long> setMealDishIdsByDishId = setmealDishMapper.getSetMealDishIdsByDishId(ids);
         if (setMealDishIdsByDishId!=null&&!setMealDishIdsByDishId.isEmpty()){
             throw new DeletionNotAllowedException(MessageConstant.DISH_BE_RELATED_BY_SETMEAL);
         }
@@ -81,4 +78,31 @@ public class DishServiceImpl implements DishService {
         dishMapper.deleteBatch(ids);
         dishFlavorsMapper.deleteBatch(ids);
     }
+
+    @Override
+    public DishVO dishWithFlavorsById(Long id) {
+        Dish dish = dishMapper.select(id);
+        List<DishFlavor> dishFlavor = dishFlavorsMapper.selectByDishId(id);
+        DishVO dishVO=new DishVO();
+        BeanUtils.copyProperties(dish,dishVO);
+        dishVO.setFlavors(dishFlavor);
+        return dishVO;
+    }
+
+    @Override
+    public void updateDishWithFlavors(DishDTO dishDTO) {
+        Dish dish = new Dish();
+        BeanUtils.copyProperties(dishDTO,dish);
+        dishMapper.update(dish);
+        // 删除菜品对应的所有口味
+        dishFlavorsMapper.deleteByDishId(dishDTO.getId());
+        List<DishFlavor> flavors = dishDTO.getFlavors();
+        if(flavors != null && !flavors.isEmpty()){
+            flavors.forEach(dishFlavor -> {
+                dishFlavor.setDishId(dishDTO.getId());
+            });
+            dishFlavorsMapper.insertBatch(flavors);
+        }
+    }
+
 }
