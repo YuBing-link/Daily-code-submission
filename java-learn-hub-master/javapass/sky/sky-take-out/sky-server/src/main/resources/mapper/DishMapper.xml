@@ -36,9 +36,11 @@
     </update>
     <delete id="deleteBatch">
         delete from dish where id in
-        <foreach collection="Ids" item="id" separator="," open="(" close=")">
+
+        <foreach collection="list" item="id" separator="," open=" (" close=")">
            #{id}
         </foreach>
+
     </delete>
     <select id="pageQuery" resultType="com.sky.vo.DishVO">
         select d.*, c.name as  categoryName from dish d left outer join category c on d.category_id = c.id

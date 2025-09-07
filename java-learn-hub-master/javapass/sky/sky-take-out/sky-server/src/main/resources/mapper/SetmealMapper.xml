@@ -10,5 +10,59 @@
         values (#{name}, #{categoryId}, #{price}, #{status},
         #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
     </insert>
+    <delete id="deleteBatch">
+        delete from setmeal where id in
 
+            <foreach collection="list" item="id" separator="," open="(" close=")">
+                #{id}
+            </foreach>
+
+    </delete>
+    <select id="pageQuery" resultType="com.sky.vo.SetmealVO">
+        select s.*,sd.name as categoryName from setmeal s left outer join setmeal_dish sd on s.id = sd.setmeal_id
+    <where>
+        <if test="name != null and name !=''">
+            and s.name like concat('%',#{name},'%')
+        </if>
+        <if test="categoryId !=null">
+            and s.category_id =#{categoryId}
+        </if>
+        <if test="status !=null">
+            and s.status = #{status}
+        </if>
+    </where>
+    order by s.update_time desc
+    </select>
+    <select id="select" resultType="com.sky.entity.Setmeal">
+        select * from setmeal
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="price != null">
+                and price = #{price}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="createUser != null">
+                and create_user = #{createUser}
+            </if>
+            <if test="updateUser != null">
+                and update_user = #{updateUser}
+            </if>
+        </where>
+    </select>
 </mapper>

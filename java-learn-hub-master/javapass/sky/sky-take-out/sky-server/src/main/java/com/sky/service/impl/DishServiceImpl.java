@@ -82,10 +82,16 @@ public class DishServiceImpl implements DishService {
     @Override
     public DishVO dishWithFlavorsById(Long id) {
         Dish dish = dishMapper.select(id);
+        if (dish == null) {
+            return null;
+        }
         List<DishFlavor> dishFlavor = dishFlavorsMapper.selectByDishId(id);
         DishVO dishVO=new DishVO();
         BeanUtils.copyProperties(dish,dishVO);
-        dishVO.setFlavors(dishFlavor);
+        // 添加对dishFlavor的空值检查
+        if (dishFlavor != null) {
+            dishVO.setFlavors(dishFlavor);
+        }
         return dishVO;
     }
 
