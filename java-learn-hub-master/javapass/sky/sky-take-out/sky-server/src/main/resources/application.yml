@@ -47,3 +47,21 @@ sky:
     bucket-name: show-tails
     access-key-secret: ${OSS_ACCESS_KEY_SECRET}
     endpoint: oss-cn-hangzhou.aliyuncs.com
+
+  spring:
+    datasource:
+      druid:
+        # 连接池中的连接最大空闲时间，单位毫秒，根据实际情况调整
+        max-idle: 300000
+
+        # 连接池检测查询，用来检测连接是否有效
+        validation-query: SELECT 1
+
+        # 申请连接时检测连接有效性
+        test-on-borrow: true
+
+        # 归还连接时检测连接有效性
+        test-on-return: true
+
+        # 连接池空闲时检测连接有效性
+        test-while-idle: true

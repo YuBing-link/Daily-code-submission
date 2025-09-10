@@ -31,15 +31,17 @@ public class SetmealServiceImpl implements SetmealService {
     private SetmealDishMapper setmealDishMapper;
 
     @Override
+    @Transactional
     public void save(SetmealDTO setmealDTO) {
         Setmeal setmeal = new Setmeal();
         BeanUtils.copyProperties(setmealDTO, setmeal);
 
         setmealMapper.insert(setmeal);
+        Long id = setmeal.getId();
         List<SetmealDish> setmealDishes=setmealDTO.getSetmealDishes();
         if(setmealDishes!=null&&!setmealDishes.isEmpty()){
             setmealDishes.forEach(setmealDish ->
-                    setmealDish.setSetmealId(setmeal.getId())
+                    setmealDish.setSetmealId(id)
                     );
         }
         setmealDishMapper.insertBatch(setmealDishes);
@@ -58,7 +60,12 @@ public class SetmealServiceImpl implements SetmealService {
     public void deleteBatch(List<Long> ids) {
         //起售中的套餐不能删除
         ids.forEach(id -> {
-            Integer status = setmealMapper.select(id).getStatus();
+            Setmeal setmeal = setmealMapper.select(id);
+            if (setmeal == null) {
+                // 如果套餐不存在，抛出异常
+                throw new DeletionNotAllowedException(MessageConstant.SETMEAL_NOT_FOUND);
+            }
+            Integer status = setmeal.getStatus();
             if (StatusConstant.ENABLE.equals(status)) {
                 //当前套餐处于起售中，不能删除
                 throw new DeletionNotAllowedException(MessageConstant.SETMEAL_ON_SALE);
@@ -73,7 +80,7 @@ public class SetmealServiceImpl implements SetmealService {
     public SetmealVO getSetmealById(Long id) {
         Setmeal setmeal = setmealMapper.select(id);
         if (setmeal == null) {
-            return null;
+            throw new DeletionNotAllowedException(MessageConstant.SETMEAL_NOT_FOUND);
         }
         List<SetmealDish> setmealDishes = setmealDishMapper.select(id);
         SetmealVO setmealVO = new SetmealVO();
@@ -84,6 +91,28 @@ public class SetmealServiceImpl implements SetmealService {
 
     @Override
     public void update(SetmealDTO setmealDTO) {
+        Setmeal setmeal = new Setmeal();
+        BeanUtils.copyProperties(setmealDTO, setmeal);
+        setmealMapper.update(setmeal);
+        setmealDishMapper.delete(setmealDTO.getId());
+        List<SetmealDish> setmealDishes = setmealDTO.getSetmealDishes();
+        if (setmealDishes != null && setmealDishes.size() > 0) {
+            setmealDishes.forEach(setmealDish ->
+                    setmealDish.setSetmealId(setmealDTO.getId())
+            );
 
+        }
+        setmealDishMapper.insertBatch(setmealDishes);
+
+
+    }
+
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        Setmeal setmeal = Setmeal.builder()
+                .id(id)
+                .status(status)
+                .build();
+                setmealMapper.update(setmeal);
     }
 }
