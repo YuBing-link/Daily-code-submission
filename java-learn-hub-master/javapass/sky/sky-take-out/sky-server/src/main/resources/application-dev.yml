@@ -6,3 +6,10 @@ sky:
     database: sky_take_out
     username: root
     password: ${MYSQL_LOCALHOST_ADMIN_PASSWORD}
+  redis:
+      host: localhost
+      port: 6379
+      password: ${REDIS_LOCALHOST_PASSWORD}
+  wechat:
+    appid:  ${WECHAT_APPID}
+    secret:  ${WECHAT_SECRET}
