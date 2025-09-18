@@ -8,8 +8,7 @@ import com.sky.entity.ShoppingCart;
 import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealMapper;
 import com.sky.mapper.ShoppingCartMapper;
-import com.sky.service.DishService;
-import com.sky.service.SetmealService;
+import com.sky.result.Result;
 import com.sky.service.ShoppingCartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -28,6 +27,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     DishMapper dishMapper;
     @Autowired
     SetmealMapper setmealMapper;
+    /**
+     * 添加购物车
+     * @param shoppingCartDTO
+     */
     @Override
     public void add(ShoppingCartDTO shoppingCartDTO) {
         // 查询当前菜品或套餐是否在购物车中
@@ -59,5 +62,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
         }
 
+    }
+    /**
+     * 查看购物车
+     *
+     * @return
+     */
+    @Override
+    public List<ShoppingCart> list() {
+    List<ShoppingCart> list = shoppingCartMapper.select();
+    return list;
     }
 }

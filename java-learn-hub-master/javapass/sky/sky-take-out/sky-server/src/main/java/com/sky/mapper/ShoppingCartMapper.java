@@ -6,10 +6,7 @@ import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
 import com.sky.entity.ShoppingCart;
 import com.sky.enumeration.OperationType;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -36,4 +33,6 @@ public interface ShoppingCartMapper {
      */
     @Update("update shopping_cart set number = #{number} where id = #{id}")
     void update(ShoppingCart shoppingCart);
+    @Select("select * from shopping_cart")
+    List<ShoppingCart> select();
 }
