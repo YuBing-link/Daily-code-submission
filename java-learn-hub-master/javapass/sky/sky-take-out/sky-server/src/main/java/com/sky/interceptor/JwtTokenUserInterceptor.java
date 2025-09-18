@@ -45,17 +45,52 @@ public class JwtTokenUserInterceptor implements HandlerInterceptor {
 
         //2、校验令牌
         try {
-            log.info("jwt校验:{}", token);
-            Claims claims = JwtUtil.parseJWT(jwtProperties.getUserSecretKey(), token);
-            Long userId = Long.valueOf(claims.get(JwtClaimsConstant.USER_ID).toString());
-            BaseContext.setCurrentId(userId);
-            log.info("当前员工id：{}", userId);
-            //3、通过，放行
-            return true;
-        } catch (Exception ex) {
-            //4、不通过，响应401状态码
-            response.setStatus(401);
-            return false;
-        }
+//            log.info("jwt校验:{}", token);
+//            Claims claims = JwtUtil.parseJWT(jwtProperties.getUserSecretKey(), token);
+//            Long userIdStr = Long.valueOf(claims.get(JwtClaimsConstant.USER_ID).toString());
+//
+//            // 校验 userId 是否为空或非法格式
+//            if (userIdStr == null || userIdStr.trim().isEmpty()) {
+//                log.warn("JWT中USER_ID为空");
+//                response.setStatus(401);
+//                return false;
+//            }
+//
+//            // 尝试解析为 Long
+//            Long userId = null;
+//            try {
+//                userId = Long.valueOf(userIdStr);
+//            } catch (NumberFormatException e) {
+//                log.error("JWT中USER_ID格式不合法: {}", userIdStr, e);
+//                response.setStatus(401);
+//                return false;
+//            }
+//
+//            BaseContext.setCurrentId(userId);
+//            log.info("当前用户id: {}", userId);
+//            return true;
+//        } catch (Exception ex) {
+//            log.error("JWT解析失败: {}", ex.getMessage(), ex);
+//            response.setStatus(401);
+//            return false;
+//        }
+
+                log.info("jwt校验:{}", token);
+                // 解析 JWT，获取 Claims
+                Claims claims = JwtUtil.parseJWT(jwtProperties.getUserSecretKey(), token);
+                // 从 Claims 中获取用户 ID 并转换为 Long 类型
+                Long userId = Long.valueOf(claims.get(JwtClaimsConstant.USER_ID).toString());
+                // 将用户 ID 设置到 BaseContext 中，供后续业务使用
+                BaseContext.setCurrentId(userId);
+                log.info("当前用户id:{}", userId);
+                // 校验通过，放行
+                return true;
+            } catch (Exception ex) {
+                log.error("JWT 校验异常", ex);
+                // 校验不通过，响应 401 状态码
+                response.setStatus(401);
+                return false;
+            }
+
     }
 }

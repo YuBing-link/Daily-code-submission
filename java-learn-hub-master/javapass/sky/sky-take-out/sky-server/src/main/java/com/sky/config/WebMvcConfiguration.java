@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.messaging.converter.MappingJackson2MessageConverter;
+
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -38,16 +38,43 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      *
      * @param registry
      */
-    protected void addInterceptors(InterceptorRegistry registry) {
-        log.info("开始注册自定义拦截器...");
+
+    /**
+     * 注册管理端自定义拦截器
+     *
+     * @param registry
+     */
+    protected void addInterceptors1(InterceptorRegistry registry) {
+        log.info("开始注册管理自定义拦截器...");
         registry.addInterceptor(jwtTokenAdminInterceptor)
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/employee/login");
+    }
+
+    /**
+     * 注册用户端自定义拦截器
+     *
+     * @param registry
+     */
+    protected void addInterceptors2(InterceptorRegistry registry) {
+        log.info("开始注册用户自定义拦截器...");
 
         registry.addInterceptor(jwtTokenUserInterceptor)
-                .addPathPatterns("user/**")
+                .addPathPatterns("/user/**")
                 .excludePathPatterns("/user/user/login")
                 .excludePathPatterns("/user/shop/status");
+    }
+
+    /**
+     * 注册自定义拦截器
+     *
+     * @param registry
+     */
+    @Override
+    protected void addInterceptors(InterceptorRegistry registry) {
+        // 调用自定义的拦截器注册方法
+        addInterceptors1(registry);
+        addInterceptors2(registry);
     }
 
 
