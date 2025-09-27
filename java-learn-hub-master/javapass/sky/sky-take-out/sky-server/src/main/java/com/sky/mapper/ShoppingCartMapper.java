@@ -1,11 +1,6 @@
 package com.sky.mapper;
 
-import com.github.pagehelper.Page;
-import com.sky.annotation.AutoFill;
-import com.sky.dto.CategoryPageQueryDTO;
-import com.sky.entity.Category;
 import com.sky.entity.ShoppingCart;
-import com.sky.enumeration.OperationType;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -35,4 +30,8 @@ public interface ShoppingCartMapper {
     void update(ShoppingCart shoppingCart);
     @Select("select * from shopping_cart")
     List<ShoppingCart> select();
+    @Delete("delete from shopping_cart where user_id=#{userId}")
+    void delete(Long userId);
+
+    void sub(ShoppingCart shoppingCart);
 }

@@ -8,7 +8,6 @@ import com.sky.entity.ShoppingCart;
 import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealMapper;
 import com.sky.mapper.ShoppingCartMapper;
-import com.sky.result.Result;
 import com.sky.service.ShoppingCartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -72,5 +71,27 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public List<ShoppingCart> list() {
     List<ShoppingCart> list = shoppingCartMapper.select();
     return list;
+    }
+
+    @Override
+    public void clean() {
+        Long userId = BaseContext.getCurrentId();
+        shoppingCartMapper.delete(userId);
+    }
+
+    @Override
+    public void sub(ShoppingCartDTO shoppingCartDTO) {
+        ShoppingCart shoppingCart=new ShoppingCart();
+        BeanUtils.copyProperties(shoppingCartDTO,shoppingCart);
+        shoppingCart.setUserId(BaseContext.getCurrentId());
+        List<ShoppingCart> list = shoppingCartMapper.list(shoppingCart);
+        if(list.get(0).getNumber()==1){
+            shoppingCartMapper.sub(list.get(0));
+        }else{
+            list.get(0).setNumber(list.get(0).getNumber()-1);
+            shoppingCartMapper.update(list.get(0));
+        }
+
+
     }
 }

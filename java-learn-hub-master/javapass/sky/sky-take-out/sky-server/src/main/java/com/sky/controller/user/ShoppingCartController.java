@@ -35,6 +35,20 @@ public class ShoppingCartController {
         log.info("查看购物车");
         return Result.success(shoppingCartService.list());
     }
+    @PostMapping("/sub")
+    @ApiOperation("删除购物车中的商品")
+    public Result sub(@RequestBody ShoppingCartDTO shoppingCartDTO) {
+        log.info("删除购物车中的商品");
+        shoppingCartService.sub(shoppingCartDTO);
+        return Result.success();
+    }
+    @DeleteMapping("/clean")
+    @ApiOperation("清空购物车")
+    public Result clean() {
+        log.info("清空购物车");
+        shoppingCartService.clean();
+        return Result.success();
+    }
 
 
 }
