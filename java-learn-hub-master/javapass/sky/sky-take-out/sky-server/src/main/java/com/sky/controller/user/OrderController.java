@@ -88,7 +88,15 @@ public class OrderController {
         ordersService.repetition(id);
         return Result.success();
     }
-
-
+    /**
+     * 催单提醒
+     */
+    @GetMapping("/reminder/{id}")
+    @ApiOperation("催单提醒")
+    public Result reminder(@PathVariable Long id) {
+        log.info("催单：{}", id);
+        ordersService.reminder(id);
+        return Result.success();
+    }
 
 }
