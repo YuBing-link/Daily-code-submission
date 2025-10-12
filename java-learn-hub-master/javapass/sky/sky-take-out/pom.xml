@@ -144,5 +144,16 @@
             </plugin>
         </plugins>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>byc-release</id>
+            <url>http://localhost:8081/repository/byc-release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>byc-snapshot</id>
+            <url>http://localhost:8081/repository/byc-snapshot/</url>
+        </snapshotRepository>
+
+    </distributionManagement>
 
 </project>
