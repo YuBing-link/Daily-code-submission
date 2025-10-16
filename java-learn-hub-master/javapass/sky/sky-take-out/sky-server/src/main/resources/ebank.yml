@@ -1,0 +1,79 @@
+server:
+  port: 8088
+
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: ${sky.datasource.driver-class-name}
+      url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${sky.datasource.username}
+      password: ${sky.datasource.password}
+  servlet:
+    multipart:
+          max-file-size: 10MB    # 单个文件最大大小
+          max-request-size: 100MB # 单次请求所有文件的总大小
+  redis:
+    host: ${sky.redis.host}
+    post: ${sky.redis.port}
+#    password: ${sky.redis.password}
+    database: 1
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.sky.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      sky:
+        mapper: debug
+        service: info
+        controller: info
+
+sky:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: dbcsaif
+    # 设置jwt过期时间
+    admin-ttl: 720000000000000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: token
+
+    user-secret-key: bycys
+    user-ttl: 720000000000000
+    user-token-name: authentication
+  alioss:
+    access-key-id: ${OSS_ACCESS_KEY_ID}
+    bucket-name: show-tails
+    access-key-secret: ${OSS_ACCESS_KEY_SECRET}
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+  wechat:
+    appid: ${sky.wechat.appid}
+    secret: ${sky.wechat.secret}
+  spring:
+    datasource:
+      druid:
+        # 连接池中的连接最大空闲时间，单位毫秒，根据实际情况调整
+        max-idle: 300000
+
+        # 连接池检测查询，用来检测连接是否有效
+        validation-query: SELECT 1
+
+        # 申请连接时检测连接有效性
+        test-on-borrow: true
+
+        # 归还连接时检测连接有效性
+        test-on-return: true
+
+        # 连接池空闲时检测连接有效性
+        test-while-idle: true
+
