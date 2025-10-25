@@ -1,5 +1,6 @@
 package com.sky.controller.admin;
 
+import com.byc.ip_spring_boot_starter.Server.ipServer;
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
@@ -36,12 +37,14 @@ public class DishController {
         redisdelete("dish_"+dishDTO.getCategoryId());
         return Result.success();
     }
+    @Autowired
+    private ipServer ipServer;
     @GetMapping("page")
     @ApiOperation("菜品分页显示")
     public Result<PageResult> page(DishPageQueryDTO dishPageQueryDTO){
         log.info("菜品分页查询:{}",dishPageQueryDTO);
         PageResult pageResult=dishService.pageQuery(dishPageQueryDTO);
-
+        ipServer.ipCountServer();
         return Result.success(pageResult);
     }
     @DeleteMapping
