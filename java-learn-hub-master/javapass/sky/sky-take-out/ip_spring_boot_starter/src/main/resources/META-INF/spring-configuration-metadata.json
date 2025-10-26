@@ -1,0 +1,39 @@
+{
+  "groups": [
+    {
+      "name": "tools.ip",
+      "type": "com.byc.ip_spring_boot_starter.Properties.ipProperties",
+      "sourceType": "com.byc.ip_spring_boot_starter.Properties.ipProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "tools.ip.cycle",
+      "type": "java.lang.Long",
+      "sourceType": "com.byc.ip_spring_boot_starter.Properties.ipProperties"
+    },
+    {
+      "name": "tools.ip.cycle-reset",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.byc.ip_spring_boot_starter.Properties.ipProperties"
+    },
+    {
+      "name": "tools.ip.model",
+      "type": "java.lang.String",
+      "sourceType": "com.byc.ip_spring_boot_starter.Properties.ipProperties"
+    }
+  ],
+  "hints": [
+    {
+      "name": "tools.ip.model",
+      "values": [
+        {
+          "value": "detail"
+        },
+        {
+          "value": "simple"
+        }
+      ]
+    }
+  ]
+}

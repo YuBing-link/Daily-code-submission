@@ -75,4 +75,3 @@ sky:
 
         # 连接池空闲时检测连接有效性
         test-while-idle: true
-

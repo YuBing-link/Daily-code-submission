@@ -1,3 +1,5 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.byc.ip_spring_boot_starter.interceptor.SpringMvc,\
 com.byc.ip_spring_boot_starter.Configuration.ipConfiguration
+

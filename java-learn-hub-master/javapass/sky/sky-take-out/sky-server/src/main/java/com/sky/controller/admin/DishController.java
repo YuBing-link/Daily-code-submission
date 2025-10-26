@@ -1,6 +1,6 @@
 package com.sky.controller.admin;
 
-import com.byc.ip_spring_boot_starter.Server.ipServer;
+
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
@@ -11,8 +11,7 @@ import com.sky.vo.DishVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Delete;
-import org.springframework.beans.BeanUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -29,22 +28,23 @@ public class DishController {
     DishService dishService;
     @Autowired
     RedisTemplate redisTemplate;
+
+
     @PostMapping
     @ApiOperation("新增菜品")
     public Result<String> save(@RequestBody DishDTO dishDTO){
         log.info("新增菜品:{}",dishDTO);
         dishService.dishWithFlavors(dishDTO);
         redisdelete("dish_"+dishDTO.getCategoryId());
+
         return Result.success();
     }
-    @Autowired
-    private ipServer ipServer;
+
     @GetMapping("page")
     @ApiOperation("菜品分页显示")
     public Result<PageResult> page(DishPageQueryDTO dishPageQueryDTO){
         log.info("菜品分页查询:{}",dishPageQueryDTO);
         PageResult pageResult=dishService.pageQuery(dishPageQueryDTO);
-        ipServer.ipCountServer();
         return Result.success(pageResult);
     }
     @DeleteMapping
