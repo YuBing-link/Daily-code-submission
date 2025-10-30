@@ -1,0 +1,42 @@
+server:
+  port: 8081
+spring:
+  profiles:
+    active: dev
+  application:
+    name: hmdp
+  datasource:
+    driver-class-name: ${mysql.driver-class-name}
+    url: ${mysql.url}
+    username: ${mysql.username}
+    password: ${mysql.password}
+  redis:
+    host: ${myRedis.host}
+    port: ${myRedis.port}
+    password: ${myRedis.password}
+    lettuce:
+      pool:
+        max-active: ${myRedis.lettuce.pool.max-active}
+        max-idle: ${myRedis.lettuce.pool.max-idle}
+        min-idle: ${myRedis.lettuce.pool.min-idle}
+        time-between-eviction-runs: ${myRedis.lettuce.pool.time-between-eviction-runs}
+  jackson:
+    default-property-inclusion: non_null # JSON处理时忽略非空字段
+  # 发送邮件配置
+  mail:
+    host: ${myMail.host}  # SMTP服务器地址（QQ邮箱），其他邮箱需修改
+    username: ${myMail.username}  # 发送方邮箱
+    password: ${myMail.password} # 16位授权码
+    default-encoding: ${myMail.default-encoding}
+    properties:
+      mail:
+        smtp:
+          auth: ${myMail.properties.mail.smtp.auth}  # 是否需要认证（true则必须提供用户名和密码）
+          starttls:
+            enable: ${myMail.properties.mail.smtp.starttls.enable}  # 启用STARTTLS扩展（将纯文本连接升级为加密连接）
+            required: ${myMail.properties.mail.smtp.starttls.required}  # 强制要求STARTTLS
+mybatis-plus:
+  type-aliases-package: com.hmdp.entity # 别名扫描包
+logging:
+  level:
+    com.hmdp: debug
