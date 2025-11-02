@@ -10,6 +10,7 @@ import com.hmdp.utils.SystemConstants;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -33,7 +34,8 @@ public class ShopController {
      */
     @GetMapping("/{id}")
     public Result queryShopById(@PathVariable("id") Long id) {
-        return Result.ok(shopService.getById(id));
+        Shop shop = shopService.getRedisById(id);
+        return Result.ok(shop);
     }
 
     /**
@@ -44,9 +46,9 @@ public class ShopController {
     @PostMapping
     public Result saveShop(@RequestBody Shop shop) {
         // 写入数据库
-        shopService.save(shop);
+        Long l = shopService.redisSave(shop);
         // 返回店铺id
-        return Result.ok(shop.getId());
+        return Result.ok(l);
     }
 
     /**
@@ -57,7 +59,7 @@ public class ShopController {
     @PutMapping
     public Result updateShop(@RequestBody Shop shop) {
         // 写入数据库
-        shopService.updateById(shop);
+        shopService.updateRedisById(shop);
         return Result.ok();
     }
 
@@ -73,11 +75,10 @@ public class ShopController {
             @RequestParam(value = "current", defaultValue = "1") Integer current
     ) {
         // 根据类型分页查询
-        Page<Shop> page = shopService.query()
-                .eq("type_id", typeId)
-                .page(new Page<>(current, SystemConstants.DEFAULT_PAGE_SIZE));
+
+        List<Shop> records = shopService.queryPage(typeId,current);
         // 返回数据
-        return Result.ok(page.getRecords());
+        return Result.ok(records);
     }
 
     /**
@@ -92,10 +93,8 @@ public class ShopController {
             @RequestParam(value = "current", defaultValue = "1") Integer current
     ) {
         // 根据类型分页查询
-        Page<Shop> page = shopService.query()
-                .like(StrUtil.isNotBlank(name), "name", name)
-                .page(new Page<>(current, SystemConstants.MAX_PAGE_SIZE));
+        List<Shop> records = shopService.queryPageByName(name,current);
         // 返回数据
-        return Result.ok(page.getRecords());
+        return Result.ok(records);
     }
 }

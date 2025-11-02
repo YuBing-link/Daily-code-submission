@@ -3,6 +3,8 @@ package com.hmdp.service;
 import com.hmdp.entity.Shop;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IShopService extends IService<Shop> {
 
+    Shop getRedisById(Long id);
+
+    Long redisSave(Shop shop);
+
+    void updateRedisById(Shop shop);
+
+    List<Shop> queryPage(Integer typeId, Integer current);
+
+    List<Shop> queryPageByName(String name, Integer current);
 }
