@@ -7,17 +7,21 @@ import com.hmdp.entity.Shop;
 import com.hmdp.mapper.ShopMapper;
 import com.hmdp.service.IShopService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hmdp.utils.RedisData;
 import com.hmdp.utils.SystemConstants;
+import com.hmdp.utils.ThreadPool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static com.hmdp.utils.RedisConstants.CACHE_SHOP_KEY;
+import static com.hmdp.utils.RedisConstants.LOCK_SHOP_KEY;
 
 /**
  * <p>
@@ -32,6 +36,16 @@ import static com.hmdp.utils.RedisConstants.CACHE_SHOP_KEY;
 public class ShopServiceImpl extends ServiceImpl<ShopMapper, Shop> implements IShopService {
     @Autowired
     private RedisTemplate redisTemplate;
+    @Autowired
+    private ThreadPool threadPool;
+
+    private Boolean lockMutex(Long id){
+        Boolean mutex = redisTemplate.opsForValue().setIfAbsent(LOCK_SHOP_KEY + id, "mutex", 10, TimeUnit.SECONDS);
+        return mutex;
+    }
+    private void unlockMutex(Long id){
+        redisTemplate.delete(LOCK_SHOP_KEY + id);
+    }
 
 
     /**
@@ -41,24 +55,49 @@ public class ShopServiceImpl extends ServiceImpl<ShopMapper, Shop> implements IS
      */
     @Override
     public Shop getRedisById(Long id) {
-        Map<String, Object> shopMap = redisTemplate.opsForHash().entries(CACHE_SHOP_KEY + id);
-        Shop shop = new Shop();
-        if (shopMap.isEmpty()) {
-            shop = this.getById(id);
-            if (shop == null) {
-                redisTemplate.opsForHash().put(CACHE_SHOP_KEY + id, "",null);
-                redisTemplate.expire(CACHE_SHOP_KEY + id, 2, TimeUnit.MINUTES);
-                log.info("恶意攻击:"+CACHE_SHOP_KEY + id);
-                return null;
+        Map<String, Object> shopRedisDataMap = redisTemplate.opsForHash().entries(CACHE_SHOP_KEY + id);
+        RedisData redisData = new RedisData();
+        if (shopRedisDataMap.isEmpty()) {
+            try {
+                if (!lockMutex(id)) {
+                    Thread.sleep(10);
+                    return getRedisById(id);
+                }
+                Shop shop = this.getById(id);
+                if (shop == null) {
+                    redisTemplate.opsForHash().put(CACHE_SHOP_KEY + id,""," ");
+                    redisTemplate.expire(CACHE_SHOP_KEY + id, 2, TimeUnit.MINUTES);
+                    log.error("查询数据不存在");
+                }
+                redisData.setData(shop);
+                redisData.setExpireTime(LocalDateTime.now().plusSeconds(30));
+                redisTemplate.opsForHash().putAll(CACHE_SHOP_KEY + id, BeanUtil.beanToMap(redisData));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } finally {
+                unlockMutex(id);
             }
-            shopMap = BeanUtil.beanToMap(shop);
-            redisTemplate.opsForHash().putAll(CACHE_SHOP_KEY + id, shopMap);
-            redisTemplate.expire(CACHE_SHOP_KEY + id, 30, TimeUnit.MINUTES);
-            log.info(CACHE_SHOP_KEY + id + " is empty, save to redis");
-            return shop;
         }
-         BeanUtil.fillBeanWithMap(shopMap, shop, true);
-        return shop;
+        BeanUtil.fillBeanWithMap(shopRedisDataMap, redisData, true);
+        if (redisData.getExpireTime().isBefore(LocalDateTime.now())) {
+            log.error("缓存即将过期");
+                if (lockMutex(id)) {
+                    threadPool.threadPoolExecutor.submit(() -> {
+                        try {
+                            Shop shop = this.getById(id);
+                            redisData.setData(shop);
+                            redisData.setExpireTime(LocalDateTime.now().plusSeconds(30));
+                            System.out.println(LocalDateTime.now().plusSeconds(30));
+                            redisTemplate.opsForHash().putAll(CACHE_SHOP_KEY + id, BeanUtil.beanToMap(redisData));
+                        } finally {
+                            unlockMutex(id);
+                        }
+                    });
+                 }
+            }
+        shopRedisDataMap = redisTemplate.opsForHash().entries(CACHE_SHOP_KEY + id);
+        BeanUtil.fillBeanWithMap(shopRedisDataMap, redisData, true);
+        return BeanUtil.toBean(redisData.getData(), Shop.class);
     }
     /**
      * 新增商铺信息
