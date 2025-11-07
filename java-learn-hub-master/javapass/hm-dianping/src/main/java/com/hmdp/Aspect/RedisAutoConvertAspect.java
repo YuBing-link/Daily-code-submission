@@ -4,13 +4,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
-
-import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.stereotype.Component;
-
-import java.lang.reflect.Method;
-import java.lang.reflect.Type;
+import java.util.LinkedHashMap;
 
 @Aspect
 @Component
@@ -25,26 +20,39 @@ public class RedisAutoConvertAspect {
 
     @Around("redisAutoPointcut()")
     public Object redisAutoConvert(ProceedingJoinPoint joinPoint) throws Throwable {
+        System.out.println("切面开始执行");
         Object result = joinPoint.proceed();
-        if(result==null){
+        System.out.println("切面捕获到的结果类型: " + (result != null ? result.getClass() : "null"));
+        if(result == null){
             return null;
         }
-
-        // 获取方法签名信息，包含方法名、参数类型、返回类型等
-        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        // 通过签名获取实际的方法对象，可以进一步获取方法上的注解、参数等信息
-        Method method = methodSignature.getMethod();
-        // 获取方法的泛型返回类型，用于支持复杂类型的反序列化
-        Type returnType = method.getGenericReturnType();
-
-        TypeReference<?> typeReference = new TypeReference<Object>() {
-            @Override
-            public Type getType() {
-                return returnType;
+        // 获取方法参数
+        Object[] args = joinPoint.getArgs();
+        Class<?> targetType = null;
+        // 查找最后一个参数是否为Class类型
+        for (int i = args.length - 1; i >= 0; i--) {
+            if (args[i] instanceof Class<?>) {
+                targetType = (Class<?>) args[i];
+                break;
             }
-        };
-        result = objectMapper.convertValue(result, typeReference);
+        }
+        // 如果找到了目标类型且结果是LinkedHashMap，则进行转换
+        if (targetType != null && result instanceof LinkedHashMap) {
+            try {
+                result = objectMapper.convertValue(result, targetType);
+                System.out.println("成功转换为目标类型: " + targetType.getSimpleName());
+            } catch (Exception e) {
+                System.err.println("类型转换失败: " + e.getMessage());
+                throw e;
+            }
+        }
+
+        System.out.println("最终返回类型: " + (result != null ? result.getClass() : "null"));
         return result;
     }
+
+
+
+
 
 }
