@@ -88,6 +88,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         String token = UUID.randomUUID().toString(true);
         redisTemplate.opsForHash().putAll( LOGIN_USER_KEY+token, userDTOMap);
         redisTemplate.expire(token, 30, TimeUnit.MINUTES);
+        System.out.println(token);
         return Result.ok(token);
     }
 

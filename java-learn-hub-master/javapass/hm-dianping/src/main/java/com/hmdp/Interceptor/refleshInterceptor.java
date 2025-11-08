@@ -31,7 +31,7 @@ public class refleshInterceptor implements HandlerInterceptor {
         }
         UserDTO userDTO = BeanUtil.fillBeanWithMap(userDTOMap, new UserDTO(), false);
         UserHolder.saveUser(userDTO);
-        redisTemplate.expire(LOGIN_USER_KEY + token, 30, TimeUnit.MINUTES);
+        redisTemplate.expire(LOGIN_USER_KEY + token, 99999, TimeUnit.MINUTES);
         return true;
     }
     @Override

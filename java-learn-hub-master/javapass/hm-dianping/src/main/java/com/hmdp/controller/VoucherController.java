@@ -1,6 +1,7 @@
 package com.hmdp.controller;
 
 
+import com.hmdp.annotation.TimeLog;
 import com.hmdp.dto.Result;
 import com.hmdp.entity.Voucher;
 import com.hmdp.service.IVoucherService;
@@ -28,6 +29,7 @@ public class VoucherController {
      * @param voucher 优惠券信息
      * @return 优惠券id
      */
+    @TimeLog
     @PostMapping
     public Result addVoucher(@RequestBody Voucher voucher) {
         voucherService.save(voucher);

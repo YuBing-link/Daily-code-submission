@@ -1,6 +1,7 @@
 package com.hmdp.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hmdp.annotation.TimeLog;
 import com.hmdp.dto.Result;
 import com.hmdp.entity.Voucher;
 import com.hmdp.mapper.VoucherMapper;
@@ -37,6 +38,7 @@ public class VoucherServiceImpl extends ServiceImpl<VoucherMapper, Voucher> impl
 
     @Override
     @Transactional
+    @TimeLog
     public void addSeckillVoucher(Voucher voucher) {
         // 保存优惠券
         save(voucher);
