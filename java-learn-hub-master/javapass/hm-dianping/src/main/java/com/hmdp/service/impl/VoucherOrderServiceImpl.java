@@ -8,9 +8,11 @@ import com.hmdp.service.ISeckillVoucherService;
 import com.hmdp.service.IVoucherOrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hmdp.utils.RedisIdWork;
+import com.hmdp.utils.SimpleRedisLock;
 import com.hmdp.utils.UserHolder;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +29,8 @@ import java.util.Locale;
  */
 @Service
 public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, VoucherOrder> implements IVoucherOrderService {
+   @Autowired
+    private RedisTemplate redisTemplate;
     @Autowired
     private ISeckillVoucherService seckillVoucherService;
     @Autowired
@@ -44,10 +48,17 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
             return Result.fail("秒杀已经结束");
         }
         Long userId = UserHolder.getUser().getId();
-        synchronized (userId.toString().intern()) {
+        SimpleRedisLock simpleRedisLock = new SimpleRedisLock("voucher:order:" + userId, redisTemplate);
+        try {
+            if (!simpleRedisLock.tryLock(1000L)) {
+                return Result.fail("请勿重复下单");
+            }
             IVoucherOrderService proxy = (IVoucherOrderService) AopContext.currentProxy();
-            return proxy.queryVoucherUser(voucherId, userId);
+               return proxy.queryVoucherUser(voucherId, userId);
+        } finally {
+            simpleRedisLock.unlock();
         }
+
     }
     @Transactional
     public  Result queryVoucherUser(Long voucherId,Long userId) {
