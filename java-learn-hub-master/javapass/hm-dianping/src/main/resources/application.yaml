@@ -40,3 +40,8 @@ mybatis-plus:
 logging:
   level:
     com.hmdp: debug
+redisson:
+  address: ${myRedisson.address}
+  password: ${myRedisson.password}
+  database: ${myRedisson.database}
+  timeout: ${myRedisson.timeout}

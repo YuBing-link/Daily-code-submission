@@ -1,5 +1,6 @@
 package com.hmdp.service.impl;
 
+import com.hmdp.config.RedissonConfig;
 import com.hmdp.dto.Result;
 import com.hmdp.entity.SeckillVoucher;
 import com.hmdp.entity.VoucherOrder;
@@ -10,14 +11,21 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hmdp.utils.RedisIdWork;
 import com.hmdp.utils.SimpleRedisLock;
 import com.hmdp.utils.UserHolder;
+import org.redisson.Redisson;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -30,14 +38,41 @@ import java.util.Locale;
 @Service
 public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, VoucherOrder> implements IVoucherOrderService {
    @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
     @Autowired
     private ISeckillVoucherService seckillVoucherService;
     @Autowired
     private RedisIdWork RedisIdWork;
+
+    private static final DefaultRedisScript<Long> UNLOCK_SCRIPT;
+    static {
+        UNLOCK_SCRIPT = new DefaultRedisScript<>();
+        UNLOCK_SCRIPT.setLocation( new ClassPathResource("seckill.lua"));
+        UNLOCK_SCRIPT.setResultType(Long.class);
+    }
+
+    @Autowired
+    private RedisIdWork redisIdWork;
+
     @Override
     public Result seckillVoucher(Long voucherId) {
-        SeckillVoucher SVer = seckillVoucherService.getById(voucherId);
+        Long usrId = UserHolder.getUser().getId();
+        System.out.println(redisTemplate.opsForValue().get("seckill:stock:" + voucherId));
+        Long executeResult =  redisTemplate.execute(UNLOCK_SCRIPT,
+                Collections.emptyList(),
+                voucherId.toString(),
+                usrId.toString()
+        );
+        int r = executeResult.intValue();
+        if (r != 0){
+            return Result.fail(r== 1?"库存不足":"请勿重复下单");
+        }
+        long voucherOrder = redisIdWork.nextId("VoucherOrder");
+
+        return Result.ok(voucherOrder);
+    }
+    /*
+            SeckillVoucher SVer = seckillVoucherService.getById(voucherId);
         if (SVer.getStock() < 1) {
             return Result.fail("库存不足");
         }
@@ -48,18 +83,20 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
             return Result.fail("秒杀已经结束");
         }
         Long userId = UserHolder.getUser().getId();
-        SimpleRedisLock simpleRedisLock = new SimpleRedisLock("voucher:order:" + userId, redisTemplate);
+        RLock rLock = redissonClient.getLock("voucher:order:" + userId);
+
         try {
-            if (!simpleRedisLock.tryLock(1000L)) {
+            if (!rLock.tryLock(3,10, TimeUnit.SECONDS)) {
                 return Result.fail("请勿重复下单");
             }
             IVoucherOrderService proxy = (IVoucherOrderService) AopContext.currentProxy();
-               return proxy.queryVoucherUser(voucherId, userId);
+            return proxy.queryVoucherUser(voucherId, userId);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         } finally {
-            simpleRedisLock.unlock();
+            rLock.unlock();
         }
-
-    }
+     */
     @Transactional
     public  Result queryVoucherUser(Long voucherId,Long userId) {
 
