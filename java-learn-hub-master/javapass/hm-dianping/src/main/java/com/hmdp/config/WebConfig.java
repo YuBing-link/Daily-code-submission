@@ -19,16 +19,8 @@ public class WebConfig implements WebMvcConfigurer {
                         "/user/code",
                         "/user/login",
                         "/blog/hot",
-                        "/blog/detail/*",
-                        "/blog/likes",
-                        "/blog/search/*",
-                        "/shop/*",
-                        "/shoptype/*",
-                        "/upload/**",
-                        "/blog/follows/*",
-                        "/upload/**",
-                        "/blog/comments",
-                        "/blog/comments/*"
+                        "/shop/**",
+                        "/shop-type/list"
                 ).order(1);
         registry.addInterceptor(new refleshInterceptor(redisTemplate))
                 .addPathPatterns("/**")

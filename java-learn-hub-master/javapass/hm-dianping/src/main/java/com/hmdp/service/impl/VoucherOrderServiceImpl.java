@@ -1,5 +1,6 @@
 package com.hmdp.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.hmdp.dto.Result;
 import com.hmdp.entity.VoucherOrder;
 import com.hmdp.mapper.VoucherOrderMapper;
@@ -9,25 +10,26 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hmdp.utils.RedisIdWork;
 import com.hmdp.utils.ThreadPool;
 import com.hmdp.utils.UserHolder;
+
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.data.redis.connection.stream.Consumer;
-import org.springframework.data.redis.connection.stream.StreamOffset;
-import org.springframework.data.redis.connection.stream.StreamReadOptions;
+import org.springframework.data.domain.Range;
+import org.springframework.data.redis.connection.stream.*;
+
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StreamOperations;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.annotation.PostConstruct;
 import java.time.Duration;
 import java.util.Collections;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -51,7 +53,7 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
     private RedissonClient redissonClient;
 
     private static final DefaultRedisScript<Long> UNLOCK_SCRIPT;
-    private static final String queueStream = "stream.ordes";
+    private static final String queueStream = "stream.orders";
     static {
         UNLOCK_SCRIPT = new DefaultRedisScript<>();
         UNLOCK_SCRIPT.setLocation( new ClassPathResource("seckill.lua"));
@@ -64,18 +66,53 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
         threadPool.threadPoolExecutor.submit(new Thread(() -> {
             while (true) {
                 try {
-                   redisTemplate.opsForStream().read(
-                           Consumer.from('g1','c1'),
-                           StreamReadOptions.empty().count(1).block(Duration.ofSeconds(2)),
-                           StreamOffset.create()
-                   )
-
-
+                    List<MapRecord<String, Object, Object>> list = redisTemplate.opsForStream().read(
+                            Consumer.from("g1", "c1"),
+                            StreamReadOptions.empty().count(1).block(Duration.ofSeconds(2)),
+                            StreamOffset.create(queueStream, ReadOffset.lastConsumed())
+                    );
+                    if (list == null || list.isEmpty()) {
+                        // 获取失败，说明没有消息，继续获取
+                        continue;
+                    }
+                    MapRecord<String, Object, Object> record = list.get(0);
+                    VoucherOrder voucherOrder = BeanUtil.fillBeanWithMap(
+                            record.getValue(), new VoucherOrder(), true);
+                    handleVoucherOrder(voucherOrder);
+                    redisTemplate.opsForStream().acknowledge(queueStream, "g1",record.getId());
                 } catch (Exception e) {
+                    handlePendingList();
                     log.error("处理订单异常", e);
                 }
             }
         }));
+    }
+
+    private void handlePendingList() {
+        try {
+            // 1. 查询消费组 g1 的 Pending List 消息（获取消息摘要）
+            Range<String> range = Range.closed("-", "+"); // 匹配所有 ID 范围
+            PendingMessages pendingMessages = redisTemplate.opsForStream().pending(
+                    queueStream, "g1", range, 10); // 最多 10 条
+            if (pendingMessages == null || pendingMessages.isEmpty()) {
+                return; // 无未确认消息
+            }
+
+            // 2. 提取消息 ID 列表
+            List<RecordId> messageIds = pendingMessages.stream()
+                    .map(PendingMessage::getId)
+                    .collect(Collectors.toList());
+
+            // 3. 批量确认消息（从 Pending List 移除）
+            if (!messageIds.isEmpty()) {
+                redisTemplate.opsForStream().acknowledge(
+                        queueStream, "g1",
+                        messageIds.toArray(new RecordId[0])
+                );
+            }
+        } catch (Exception e) {
+            log.error("处理 Pending List 异常", e);
+        }
     }
     private IVoucherOrderService proxy;
     private void handleVoucherOrder(VoucherOrder order) {
@@ -88,14 +125,12 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
                 return;
             }
             proxy.queryVoucherUser(order.getVoucherId(), order.getUserId());
-
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } finally {
             rLock.unlock();
         }
     }
-
     @Override
     public Result seckillVoucher(Long voucherId) {
         Long usrId = UserHolder.getUser().getId();
@@ -110,38 +145,10 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
         if (r != 0){
             return Result.fail(r== 1?"库存不足":"请勿重复下单");
         }
-
         // 保存订单
         proxy = (IVoucherOrderService) AopContext.currentProxy();
-
         return Result.ok(voucherOrderId);
     }
-    /*
-            SeckillVoucher SVer = seckillVoucherService.getById(voucherId);
-        if (SVer.getStock() < 1) {
-            return Result.fail("库存不足");
-        }
-        if (LocalDateTime.now().isBefore(SVer.getBeginTime())){
-            return Result.fail("秒杀尚未开始");
-        }
-        if (LocalDateTime.now().isAfter(SVer.getEndTime())){
-            return Result.fail("秒杀已经结束");
-        }
-        Long userId = UserHolder.getUser().getId();
-        RLock rLock = redissonClient.getLock("voucher:order:" + userId);
-
-        try {
-            if (!rLock.tryLock(3,10, TimeUnit.SECONDS)) {
-                return Result.fail("请勿重复下单");
-            }
-            IVoucherOrderService proxy = (IVoucherOrderService) AopContext.currentProxy();
-            return proxy.queryVoucherUser(voucherId, userId);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        } finally {
-            rLock.unlock();
-        }
-     */
     @Transactional
     public void queryVoucherUser(Long voucherId, Long userId) {
 

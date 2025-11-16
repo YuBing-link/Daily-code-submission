@@ -41,14 +41,6 @@ public class ShopServiceImpl extends ServiceImpl<ShopMapper, Shop> implements IS
     @Autowired
     private CacheUtils cacheUtils;
 
-    private Boolean lockMutex(Long id){
-        Boolean mutex = redisTemplate.opsForValue().setIfAbsent(LOCK_SHOP_KEY + id, "mutex", 10, TimeUnit.SECONDS);
-        return mutex;
-    }
-    private void unlockMutex(Long id){
-        redisTemplate.delete(LOCK_SHOP_KEY + id);
-    }
-
 
     /**
      * 根据id查询商铺信息

@@ -20,9 +20,7 @@ public class RedisAutoConvertAspect {
 
     @Around("redisAutoPointcut()")
     public Object redisAutoConvert(ProceedingJoinPoint joinPoint) throws Throwable {
-        System.out.println("切面开始执行");
         Object result = joinPoint.proceed();
-        System.out.println("切面捕获到的结果类型: " + (result != null ? result.getClass() : "null"));
         if(result == null){
             return null;
         }
@@ -40,14 +38,12 @@ public class RedisAutoConvertAspect {
         if (targetType != null && result instanceof LinkedHashMap) {
             try {
                 result = objectMapper.convertValue(result, targetType);
-                System.out.println("成功转换为目标类型: " + targetType.getSimpleName());
+
             } catch (Exception e) {
-                System.err.println("类型转换失败: " + e.getMessage());
                 throw e;
             }
         }
 
-        System.out.println("最终返回类型: " + (result != null ? result.getClass() : "null"));
         return result;
     }
 
