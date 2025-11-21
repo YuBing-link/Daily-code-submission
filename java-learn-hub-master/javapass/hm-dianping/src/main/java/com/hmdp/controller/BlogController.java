@@ -10,6 +10,7 @@ import com.hmdp.service.IBlogService;
 import com.hmdp.service.IUserService;
 import com.hmdp.utils.SystemConstants;
 import com.hmdp.utils.UserHolder;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -45,6 +46,11 @@ public class BlogController {
     public Result likeBlog(@PathVariable("id") Long id) {
         // 修改点赞数量
         blogService.likeBlog(id);
+        return Result.ok();
+    }
+    @GetMapping("/likes/{id}")
+    public Result likesBlog(@PathVariable("id") Long id) {
+        // 修改点赞数
 
         return blogService.likeBlogTop5(id);
     }
@@ -61,5 +67,19 @@ public class BlogController {
         // 根据用户查询
         List<Blog> blogs = blogService.orderByHot(current);
         return Result.ok(blogs);
+    }
+    @GetMapping("/of/user")
+    public Result queryBlogByUser(@RequestParam("current") Integer current,
+                                  @RequestParam("id") Long id) {
+        // 根据用户查询
+        Page<Blog> page = blogService.query()
+                .eq("user_id", id).page(new Page<>(current, SystemConstants.MAX_PAGE_SIZE));
+        // 获取当前页数据
+        List<Blog> records = page.getRecords();
+        return Result.ok(records);
+    }
+    @GetMapping("/of/follow")
+    public Result queryBlogOfFollow(@RequestParam("lastId") Long max, @RequestParam(value = "offset", defaultValue = "0")  Integer offset) {
+        return blogService.queryBlogOfFollow(max, offset);
     }
 }

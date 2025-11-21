@@ -50,10 +50,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public Result sendCode(String Mail, HttpSession session) {
         //1. 校验手机号
-        if (RegexUtils.isEmailInvalid(Mail)) {
-            //手机号不符合要求
-            return Result.fail("邮箱格式错误");
-        }
+//        if (RegexUtils.isEmailInvalid(Mail)&&RegexUtils.isPhoneInvalid(Mail)) {
+//            //手机号不符合要求
+//            return Result.fail("邮箱格式错误");
+//        }
         //2. 生成验证码
         String code = RandomUtil.randomNumbers(6);
         //3. 保存验证码到redis

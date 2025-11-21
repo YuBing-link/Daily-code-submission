@@ -1,6 +1,15 @@
 server:
   port: 8081
+  tomcat:
+    max-http-form-post-size: 10MB  # 增加表单数据最大大小限制
+  max-http-header-size: 10KB      # 增加HTTP头最大大小
+
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+      enabled: true
   profiles:
     active: dev
   application:

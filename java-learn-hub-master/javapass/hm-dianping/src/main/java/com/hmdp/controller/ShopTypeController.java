@@ -28,6 +28,7 @@ public class ShopTypeController {
     @GetMapping("list")
     public Result queryTypeList() {
         List<ShopType> typeList = typeService.redisSelectlist();
+
         return Result.ok(typeList);
     }
 }

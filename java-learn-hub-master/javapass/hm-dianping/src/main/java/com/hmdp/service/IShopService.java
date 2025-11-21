@@ -1,5 +1,6 @@
 package com.hmdp.service;
 
+import com.hmdp.dto.Result;
 import com.hmdp.entity.Shop;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -21,7 +22,8 @@ public interface IShopService extends IService<Shop> {
 
     void updateRedisById(Shop shop);
 
-    List<Shop> queryPage(Integer typeId, Integer current);
+    Result queryPageLoad(Integer typeId, Integer current, Double x, Double y);
 
     List<Shop> queryPageByName(String name, Integer current);
+
 }
