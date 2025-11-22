@@ -20,4 +20,9 @@ public interface IUserService extends IService<User> {
     Result sendCode(String Mail, HttpSession session);
 
     Result login(LoginFormDTO loginForm, HttpSession session);
+
+    Result sign();
+
+    Result signCount();
+
 }

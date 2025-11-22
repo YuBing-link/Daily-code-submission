@@ -1,6 +1,6 @@
 package com.hmdp.service.impl;
 
-import cn.hutool.core.bean.copier.CopyOptions;
+
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -14,15 +14,20 @@ import com.hmdp.entity.User;
 import com.hmdp.mapper.UserMapper;
 import com.hmdp.service.IUserService;
 import com.hmdp.utils.MailUtils;
-import com.hmdp.utils.RegexUtils;
+
 import com.hmdp.utils.SystemConstants;
 import cn.hutool.core.bean.BeanUtil;
+import com.hmdp.utils.UserHolder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.BitFieldSubCommands;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -41,7 +46,7 @@ import static com.hmdp.utils.RedisConstants.LOGIN_USER_KEY;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
     private Mail mail;
@@ -90,6 +95,43 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         redisTemplate.expire(token, 30, TimeUnit.MINUTES);
         System.out.println(token);
         return Result.ok(token);
+    }
+
+    @Override
+    public Result sign() {
+        Long userId = UserHolder.getUser().getId();
+        LocalDateTime now = LocalDateTime.now();
+        String nowFormat = now.format(DateTimeFormatter.ofPattern("yyyyMM"));
+        String key = "sign:" + userId + ":" + nowFormat;
+        int date = now.getDayOfMonth();
+        redisTemplate.opsForValue().setBit(key, date-1, true);
+        return Result.ok();
+    }
+
+    @Override
+    public Result signCount() {
+        Long userId = UserHolder.getUser().getId();
+        LocalDateTime now = LocalDateTime.now();
+        String nowFormat = now.format(DateTimeFormatter.ofPattern("yyyyMM"));
+        String key = "sign:" + userId + ":" + nowFormat;
+        int date = now.getDayOfMonth();
+        List<Long> longs = redisTemplate.opsForValue().bitField(key,
+                BitFieldSubCommands.create()
+                        .get(BitFieldSubCommands.BitFieldType.unsigned(date)).valueAt(0));
+        if (longs == null || longs.isEmpty()) {
+            return Result.ok(0);
+        }
+        int signCount = longs.get(0).intValue();
+        int count = 0;
+        while (signCount != 0){
+            if((signCount & 1) == 0){
+                break;
+            }else{
+                count++;
+            }
+            signCount >>>= 1;
+        }
+        return Result.ok(count);
     }
 
     @TimeLog
